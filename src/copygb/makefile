@@ -31,7 +31,7 @@ MODULES  = ../unipost/kinds_mod.o
 #
 # extra compilation/link flags
 #   we are using single word (4 byte) for all libraries
-EXTRA_FFLAGS   =
+EXTRA_FFLAGS   = 
 #EXTRA_FFLAGS   = -c -r8
 EXTRA_LDFLAGS  = $(LIBS) 
 
@@ -48,6 +48,9 @@ $(BINDIR)/$(TARGET): $(TARGET)
 
 $(TARGET): $(SRCS) $(MODULES)
 	$(SFC) -o $@ $(SRCS) $(MODULES) $(FFLAGS) $(EXTRA_FFLAGS) $(LDFLAGS) $(EXTRA_LDFLAGS)
+
+../unipost/kinds_mod.o: ../unipost/kinds_mod.f
+	$(SFC) -o $@ $(FFLAGS) $(EXTRA_FFLAGS) -c -free ../unipost/kinds_mod.f
 
 clean:	
 	@ echo -e "\n <><><><> CLEAN <><><><>\n"

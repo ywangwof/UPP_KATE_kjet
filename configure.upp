@@ -24,9 +24,9 @@ SFC     = ifort
 SF90    = ifort -free
 SCC     = icc
 
-DM_FC  = mpiifort 
-DM_F90 = mpiifort -free 
-DM_CC  = mpiicc 
+DM_FC  = mpif90
+DM_F90 = mpif90 -free
+DM_CC  = mpicc
 
 FC      = $(DM_FC)
 F90     = $(DM_F90)
@@ -47,13 +47,13 @@ FDEBUG  = -O0 -g -traceback -check all -ftrapuv -fpe0
 CRTMDBUG= -O0 -g -traceback -check all -ftrapuv -fpe0
 CDEBUG  = -O0 -g -traceback -debug all -Wall -check-uninit
 
-FOPT    = -O3 
+FOPT    = -O3
 CRTMOPT = -O3
 COPT    = -O3
 
 CPP_FLAGS = -P -traditional-cpp $(FPPDEFINE)
 INC_FLAGS =
-LDFLAGS   = -Wl,-noinhibit-exec 
+LDFLAGS   = -Wl,-noinhibit-exec
 FFLAGS    = -fp-model source -ftz -assume byterecl -convert big_endian \
             -heap-arrays $(SIZE) $(FPPDEFINE) $(FOPT)
 CFLAGS    = $(PPDEFINE) $(COPT)
@@ -62,7 +62,7 @@ ARFLAGS   =
 FFLAGS_CRTM  = -c -fp-model source -ftz  -assume byterecl -convert big_endian \
                $(SIZE) $(FOPT)
 #FFLAGS_CRTM = -c -checkbound -convert big_endian -e03 -free -assume byterecl -fp-stack-check -mieee-fp
-FL_CRTM     = 
+FL_CRTM     =
 
 ###########################################################
 #
@@ -74,36 +74,35 @@ CP		=   /bin/cp
 MV              =   /bin/mv
 AR		=   ar ru
 
-WRF_DIR         =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/WRFV4.0
-WRF_LIB2        =    
-NETCDFPATH      =    /apps/netcdf/4.7.4/intel/18.0.5
-NETCDFLIBS      =    -lnetcdff -lnetcdf
+WRF_DIR         =    /scratch/ywang/MPAS/WRFV4.0
+WRF_LIB2        =
+NETCDFPATH      =    /scratch/ywang/tools/hpc-stack/intel-2021.8.0/impi-2021.8.0/netcdf/4.7.4
+NETCDFLIBS      =    -lnetcdff -lnetcdf -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/zlib/1.2.11/lib -lz -ldl -lm -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/impi-2021.8.0/hdf5/1.10.6/lib -lhdf5_hl -lhdf5  -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/impi-2021.8.0/pnetcdf/1.12.1/lib -lpnetcdf
 
-COMMS_ADD_OBJ   =    
-COMMS_ADD_OBJST =    
-COMMS_LIB       =    
+COMMS_ADD_OBJ   =
+COMMS_ADD_OBJST =
+COMMS_LIB       =
 
-SERIAL_MPI_STUB =    
-SERIAL_MPI_LIB  =    
+SERIAL_MPI_STUB =
+SERIAL_MPI_LIB  =
 
-GRIB2SUPT_LIB   =    -L/contrib/jasper/lib -L/opt/freeware/lib -ljasper -lpng -lz
-GRIB2SUPT_INC   =    -I/contrib/libpng/include -I/contrib/zlib/include -I/contrib/jasper/include
+GRIB2SUPT_LIB   =    -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/jasper/2.0.25/lib64 -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/libpng/1.6.37/lib64 -ljasper -lpng -L/scratch/ywang/tools/hpc-stack/intel-2021.8.0/zlib/1.2.11/lib -lz
+GRIB2SUPT_INC   =    -I/scratch/ywang/tools/hpc-stack/intel-2021.8.0/libpng/1.6.37/include -I/scratch/ywang/tools/hpc-stack/intel-2021.8.0/zlib/1.2.11/include -I/scratch/ywang/tools/hpc-stack/intel-2021.8.0/jasper/2.0.25/include
 
-BINDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/bin
-INCMOD          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/include
-LIBDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/lib
+BINDIR          =    /scratch/ywang/MPAS/UPP_KATE_kjet/bin
+INCMOD          =    /scratch/ywang/MPAS/UPP_KATE_kjet/include
+LIBDIR          =    /scratch/ywang/MPAS/UPP_KATE_kjet/lib
 
 WRF_INCLUDE     = -I$(WRF_DIR)/frame
 
 WRF_LIB         = -L$(WRF_DIR)/main  -lwrflib \
                   -L$(WRF_DIR)/external/io_int -lwrfio_int \
                   -L$(WRF_DIR)/external/io_netcdf -lwrfio_nf \
+                  -L$(WRF_DIR)/external/io_pnetcdf -lwrfio_pnf \
                   -L$(WRF_DIR)/external/io_grib1 -lio_grib1 \
                   -L$(WRF_DIR)/external/io_grib_share -lio_grib_share \
                   -L$(WRF_DIR)/external/esmf_time_f90 -lesmf_time \
-                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack \
-                  -L$(WRF_DIR)/external/io_pnetcdf -lwrfio_pnf \
-                  -L/apps/pnetcdf/1.6.1-intel15-impi5/lib -lpnetcdf
+                  -L$(WRF_DIR)/external/fftpack/fftpack5 -lfftpack
 
 WRF_MODS        = $(WRF_DIR)/frame/module_internal_header_util.o \
                   $(WRF_DIR)/frame/pack_utils.o \
@@ -112,7 +111,7 @@ WRF_MODS        = $(WRF_DIR)/frame/module_internal_header_util.o \
 		  $(WRF_DIR)/frame/wrf_debug.o
 
 #
-# These files may be changed to enable other files with the same 
+# These files may be changed to enable other files with the same
 # functions definitions, but different logic.  This is typically
 # how backward compatibilty is achieved for the community code.
 INITPOST_NMM_BIN_MPIIO = INITPOST_NMM_BIN_MPIIO_IJK.f
