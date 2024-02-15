@@ -117,7 +117,7 @@ fi
 #   3> Manually entered
 # =============================================================================
 if [ -z "$WRF_DIR" ] ; then       # 1> enviro var
-  p=`pwd`/../WRFV3                # 2> ./../WRFV3
+  p=`pwd`/../WRFV4.0                # 2> ./../WRFV3
   if [ -d  $p ]; then
     WRF_DIR=$p
 
