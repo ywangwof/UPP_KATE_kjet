@@ -74,9 +74,9 @@ CP		=   /bin/cp
 MV              =   /bin/mv
 AR		=   ar ru
 
-WRF_DIR         =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/WRFV4.0
+WRF_DIR         =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/../WRFV4.0
 WRF_LIB2        =    
-NETCDFPATH      =    /apps/netcdf/4.7.4/intel/18.0.5
+NETCDFPATH      =    /apps/netcdf/4.7.0/intel_2023.2.0-impi
 NETCDFLIBS      =    -lnetcdff -lnetcdf
 
 COMMS_ADD_OBJ   =    
@@ -86,8 +86,8 @@ COMMS_LIB       =
 SERIAL_MPI_STUB =    
 SERIAL_MPI_LIB  =    
 
-GRIB2SUPT_LIB   =    -L/contrib/jasper/lib -L/opt/freeware/lib -ljasper -lpng -lz
-GRIB2SUPT_INC   =    -I/contrib/libpng/include -I/contrib/zlib/include -I/contrib/jasper/include
+GRIB2SUPT_LIB   =    -L/lfs4/NAGAPE/wof/miniconda3_RL/lib -lpng -lz -ljasper
+GRIB2SUPT_INC   =    -I/lfs4/NAGAPE/wof/miniconda3_RL/lib/include/jasper
 
 BINDIR          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/bin
 INCMOD          =    /lfs4/NAGAPE/hpc-wof1/ywang/MPAS/UPP_KATE_kjet/include
