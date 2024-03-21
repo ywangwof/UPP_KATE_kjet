@@ -176,7 +176,7 @@ int SUB_NAME(unsigned char *cin,g2int *pwidth,g2int *pheight,g2int *pnbits,
 //
 //     Encode image.
 //
-    ier=jas_image_encode(&image,jpcstream,4,opts);
+    ier=jpc_encode(&image,jpcstream,opts);
     if ( ier != 0 ) {
        printf(" jpc_encode return = %d \n",ier);
        return -3;

@@ -84,7 +84,7 @@
 //   
 //     Decode JPEG200 codestream into jas_image_t structure.
 //       
-    image=jas_image_decode(jpcstream,4,opts);
+    image=jpc_decode(jpcstream,opts);
     if ( image == 0 ) {
        printf(" jpc_decode return = %d \n",ier);
        return -3;
